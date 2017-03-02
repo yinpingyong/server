@@ -4,14 +4,22 @@ import cn.com.bestpay.server.enums.LoginEnum;
 import cn.com.bestpay.server.model.request.LoginRequest;
 import cn.com.bestpay.server.model.response.LoginResponse;
 import cn.com.bestpay.server.model.response.base.CommonResponse;
+import com.alibaba.dubbo.config.annotation.Service;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+
 
 /**
  * Created by Administrator on 2017/3/1.
  */
 @Slf4j
-@Service("loginService")
+/**
+ * 使用Spring自动注入业务对象
+ */
+//@Service("loginService")
+/**
+ * 使用Dubbo注解，自动注入业务对象Bean
+ */
+@Service
 public class LoginServiceImpl implements  LoginService{
 
     @Override

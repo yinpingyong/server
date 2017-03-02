@@ -9,19 +9,22 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <!-- 如果使用dubbo Bean 自动注入，需要引入自动扫包器 -->
+    <dubbo:annotation package="cn.com.bestpay" />
+
 	<!--第一步：配置应用名称-->
 	<dubbo:application name="service"/>
 
 	<!--第二步：配置协议，定义访问端口 和 线程数-->
-    <dubbo:protocol port="20880" threads="100"/>
+    <dubbo:protocol id="serverProtocal" port="20880" threads="100"/>
 
     <!--第三步：注册ZK,定义缓存-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" file="./.dubbo/service"/>
+    <dubbo:registry id = "serverRegister" address="zookeeper://127.0.0.1:2181" file="./.dubbo/service"/>
 
     <!--第四步：配置生产者实现类-->
-    <dubbo:provider filter="providerFilter" version="1.0.0"/>
+    <dubbo:provider id="serverProvider" filter="providerFilter" version="1.0.0"/>
 
-    <!--第五步：定义接口-->
-    <dubbo:service interface="cn.com.bestpay.server.service.LoginService" ref="loginService"/>
+    <!--第五步：定义接口(使用配置的方式，定义Bean（不推荐使用，推荐使用注解方式）。)-->
+    <!--<dubbo:service interface="cn.com.bestpay.server.service.LoginService" ref="loginService"/>-->
 
 </beans>
