@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!--第一步：配置应用名称-->
+	<dubbo:application name="service"/>
+
+	<!--第二步：配置协议，定义访问端口 和 线程数-->
+    <dubbo:protocol port="20880" threads="100"/>
+
+    <!--第三步：注册ZK,定义缓存-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" file="./.dubbo/service"/>
+
+    <!--第四步：配置生产者实现类-->
+    <dubbo:provider filter="providerFilter" version="1.0.0"/>
+
+    <!--第五步：定义接口-->
+    <dubbo:service interface="cn.com.bestpay.server.service.LoginService" ref="loginService"/>
+
+</beans>
