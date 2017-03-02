@@ -16,6 +16,7 @@ public class ConsumerFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerFilter.class);
 
+
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         String methodName = invocation.getMethodName();
         String className = invoker.getInterface().getSimpleName();
